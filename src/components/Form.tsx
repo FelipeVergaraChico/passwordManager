@@ -1,7 +1,14 @@
 // oi
-export default function Form() {
+type FormProps = {
+  handleClick: () => void;
+};
+
+const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
+  evento.preventDefault();
+};
+export default function Form({ handleClick }: FormProps) {
   return (
-    <form>
+    <form onSubmit={ (evento) => handleSubmit(evento) }>
       <label htmlFor="Serviço">
         Nome do serviço
         <input id="Serviço" type="text" />
@@ -19,7 +26,7 @@ export default function Form() {
         <input type="text" id="Url" />
       </label>
       <button>Cadastrar</button>
-      <button>Cancelar</button>
+      <button onClick={ handleClick }>Cancelar</button>
     </form>
   );
 }
