@@ -46,7 +46,7 @@ function App() {
               />
             );
           }))
-          : <h1>Nenhuma senha cadastrada</h1>}
+          : <h3>Nenhuma senha cadastrada</h3>}
       </div>
     </>
   );
