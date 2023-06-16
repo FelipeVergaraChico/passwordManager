@@ -1,12 +1,11 @@
 // oi
 import React, { useState } from 'react';
+import { DataType } from './type';
 
 type FormProps = {
   handleClick: () => void;
-};
-
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
+  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>,
+    arg: DataType) => void;
 };
 
 const state = {
@@ -16,7 +15,7 @@ const state = {
   url: '',
 };
 
-export default function Form({ handleClick }: FormProps) {
+export default function Form({ handleClick, handleSubmit }: FormProps) {
   const [data, setData] = useState(state);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -42,7 +41,7 @@ export default function Form({ handleClick }: FormProps) {
   };
   return (
     <section>
-      <form onSubmit={ (event) => handleSubmit(event) }>
+      <form>
         <label htmlFor="serviço">Nome do serviço</label>
         <input onChange={ handleChange } id="serviço" type="text" />
         <label htmlFor="login">Login</label>
@@ -51,7 +50,15 @@ export default function Form({ handleClick }: FormProps) {
         <input onChange={ handleChange } id="senha" type="password" />
         <label htmlFor="url">URL</label>
         <input onChange={ handleChange } id="url" type="text" />
-        <button disabled={ !check }>Cadastrar</button>
+        <button
+          disabled={ !check }
+          onClick={ (event) => {
+            handleSubmit(event, data);
+            handleClick();
+          } }
+        >
+          Cadastrar
+        </button>
         <button onClick={ handleClick }>Cancelar</button>
       </form>
       <h2
